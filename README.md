@@ -4,9 +4,18 @@
 
 開発時はキャッシュクリアや開発用のプラグインの利用が必要だったりするため、普段の Web ブラウザ利用とは違った使い方になります。そのため、開発専用の Web ブラウザ環境を用意したいときがあります。そういったときに、このコンテナーを使用します。
 
-devnode-desktop では、<https://github.com/devcontainers/images/tree/main/src/typescript-node> で公開されている mcr.microsoft.com/devcontainers/typescript-node:18-bullseye の Docker イメージをベースとし、Feature に <https://github.com/devcontainers/features/> で公開されている desktop-lite、docker-outside-of-docker、git、git-lfs を指定して Docker イメージを作成しています。
+devnode-desktop では、<https://github.com/devcontainers/images/tree/main/src/typescript-node> で公開されている mcr.microsoft.com/devcontainers/typescript-node:18-bullseye の Docker イメージをベースとしています。Feature に <https://github.com/devcontainers/features/> で公開されている desktop-lite、docker-outside-of-docker、git、git-lfs を指定して Docker イメージを作成しています。
 
-devnode-desktop では、desktop-lite に、[Firefox](https://www.mozilla.org/firefox/) ESR と [Chromium](https://www.chromium.org/Home/) を追加して使えるようにしてあります。locale 周りの設定もしてあり、追加で fonts-vlgothic フォントもインストールしてあります。
+- [desktop-lite](https://github.com/devcontainers/features/tree/main/src/desktop-lite)
+- [docker-outside-of-docker](https://github.com/devcontainers/features/tree/main/src/docker-outside-of-docker)
+- [git](https://github.com/devcontainers/features/tree/main/src/git)
+- [git-lfs](https://github.com/devcontainers/features/tree/main/src/git-lfs)
+
+devnode-desktop では、desktop-lite に次の Web ブラウザを追加して使えるようにしてあります。locale 周りの設定もしてあり、追加で fonts-vlgothic フォントもインストールしてあります。
+
+- [Firefox](https://www.mozilla.org/firefox/) ESR
+- [Chromium](https://www.chromium.org/Home/)
+- [VLゴシックフォント](https://ja.osdn.net/projects/vlgothic/)
 
 ちなみに、desktop-lite では次のソフトウェアによるデスクトップ環境が使えるようになっています。
 
