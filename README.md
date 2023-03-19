@@ -356,10 +356,10 @@ Docker ホスト側に存在するものを指定してください。
 ここでは、あらかじめ `workspace_share` ディレクトリーを用意してあり、それを使っています。
 
 これを変更することができるように、環境変数 `SHARE_DIR` を用意してあります。
-次の例では `${DEVNODE_DIR}/share` ディレクトリーを作成して、それを使うようにしています。
+次の例では `${REPO_DIR}/share` ディレクトリーを作成して、それを使うようにしています。
 
 ```sh
-cd ${DEVNODE_DIR}
+cd ${REPO_DIR}
 mkdir share
 echo 'SHARE_DIR=./share' > .env
 ```
