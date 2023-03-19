@@ -1,8 +1,12 @@
 # devnode-desktop
 
-これは日本語に対応した簡易 Desktop 環境を提供する Dev Container のためのプロジェクトです。<https://hub.docker.com/r/hiro345g/devnode-desktop> で公開している Docker イメージをビルドするためのファイルも含まれています。これを使うと、Firefox や Chromium といった Web ブラウザを使って開発中のプログラムの動作確認がしやすくなります。
+これは、Web アプリの開発時に利用できる Web ブラウザが利用できる簡易デスクトップ環境を提供する Dev Container に必要なファイルをまとめたものです。devnode-desktop を使うと日本語に対応した簡易 Desktop 環境の Docker コンテナーで Firefox や Chromium が用意できるようになります。
 
-開発時はキャッシュクリアや開発用のプラグインの利用が必要だったりするため、普段の Web ブラウザ利用とは違った使い方になります。そのため、開発専用の Web ブラウザ環境を用意したいときがあります。そういったときに、このコンテナーを使用します。
+Web アプリ開発時はキャッシュクリアや開発用のプラグインの利用が必要だったりするため、普段の Web ブラウザ利用方法とは違った使い方になります。そのため、開発専用の Web ブラウザ環境を用意したいときがあります。そういったときに、このコンテナーを使用します。
+
+これを使うと、普段使っているデスクトップ環境から隔離されたコンテナー環境で Firefox や Chromium といった Web ブラウザを使うことができるようになります。つまり、開発中の Web アプリの動作確認専用の Web ブラウザ環境が使えるようになるわけです。こういった環境を用意することで、効率よく Web アプリの開発ができるようになります。
+
+Docker イメージは <https://hub.docker.com/r/hiro345g/devnode-desktop> で公開されているものを使用します。ここには、これをビルドするためのファイルも含まれています。
 
 devnode-desktop では、<https://github.com/devcontainers/images/tree/main/src/typescript-node> で公開されている mcr.microsoft.com/devcontainers/typescript-node:18-bullseye の Docker イメージをベースとしています。Feature に <https://github.com/devcontainers/features/> で公開されている desktop-lite、docker-outside-of-docker、git、git-lfs を指定して Docker イメージを作成しています。
 
