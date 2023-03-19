@@ -29,9 +29,9 @@ devnode-desktop では、desktop-lite に次の Web ブラウザを追加して�
 
 なお、Dev Container については、開発が <https://github.com/devcontainers> でされていますので、そちらをご覧ください。
 
-ここで用意している `docker-compose.yml` では、開発するアプリの Git リモートリポジトリを devnode-desktop コンテナーの `/home/node/repo` （つまり、`devnode:/home/node/repo`）へクローンして開発することを想定しています。
+ここで用意している `docker-compose.yml` では、開発するアプリの Git リモートリポジトリを devnode-desktop コンテナーの `/home/node/repo` （つまり、`devnode-desktop:/home/node/repo`）へクローンして開発することを想定しています。
 
-また、`devnode:/home/node/repo` は Docker ボリュームの devnode-node-repo-data をマウントして使うようになっています。他にも devnode-node-vscode-server-extensions という Docker ボリュームを使うようになっています。
+また、`devnode-desktop:/home/node/repo` は Docker ボリュームの devnode-desktop-repo-data をマウントして使うようになっています。他にも devnode-desktop-vscode-server-extensions という Docker ボリュームを使うようになっています。
 
 ## 必要なもの
 
@@ -350,7 +350,7 @@ sh ./builde_devcon/build.sh
 `.env` ファイルを用意すると `docker-compose.yml` 内の `${変数名}` で指定されているものを、`.env` で指定したものへ変更できます。
 具体的な指定方法は `sample.env` ファイルを参考にしてください。
 
-コンテナーと Docker ホストとでファイルを手軽に参照したり転送したりできるように、`devnode:/share` をバインドマウントするようにしています。
+コンテナーと Docker ホストとでファイルを手軽に参照したり転送したりできるように、`devnode-desktop:/share` をバインドマウントするようにしています。
 Docker ホスト側で使用するディレクトリーを `SHARE_DIR` で指定します。
 Docker ホスト側に存在するものを指定してください。
 ここでは、あらかじめ `workspace_share` ディレクトリーを用意してあり、それを使っています。
