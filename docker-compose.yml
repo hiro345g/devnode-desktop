@@ -1,7 +1,7 @@
 name: devnode-desktop
 services:
   devnode-desktop:
-    image: devnode-desktop:1.0
+    image: devnode-desktop:1.1
     container_name: devnode-desktop
     hostname: devnode-desktop
     init: true

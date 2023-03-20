@@ -203,7 +203,25 @@ sh /share/script/install_mozc.sh
 
 ### noVNC での日本語入力
 
-noVNC では「半角/全角」キーの入力が効かないので、入力の切り替えが大変です。
+noVNC では「半角/全角」キーの入力が効かないので、英語と日本語の入力を切り替えするに戸惑うでしょう。
+
+ショートカットキーで IME の切り替えができるので、それを使います。初期値は「`Super`space」となっていて、「Windowsキーとスペースキーの同時入力」で切り替えができます。日本語入力をしたい場合は Mozc、英語入力をしたい場合は、English の IME を使います。Mozc は「ひらがな」の入力設定にしておきます。
+
+ショートカットキーの変更は、「IBuss Preference」画面の「General」タブの「Keyboard Shortcuts」にある「Next input method:」で英語と日本語のIME 利用切り替えのショートカットを指定できます。ここを「`<Shift>space`」などに変更することもできます。
+
+IBus の設定を保存しておく場合は、下記のコマンドを使います。
+
+```console
+dconf dump /desktop/ibus/ > /share/ibus.dconf
+```
+
+保存した設定を反映するには、下記のようにします。
+
+```console
+dconf load /desktop/ibus/ < /share/ibus.dconf
+```
+
+ショートカットーキーを「`Super`space」以外にするなら、IBus の設定ではなく、Mozc の設定の方でもできます。
 IBus のアイコンをクリックすると表示されるメニューで「Japanese - Mozc」を選択した状態にしていると、「ツール」-「プロパティ」というメニューが表示されるので、これをクリックすると Mozc Settings の画面が表示されます。
 この画面の「General」タブにある「Keymap」の「Customize...」をクリックすると「Mozc keymap editor」の画面が表示されて、ショートカットキーの調整ができます。ここで、IME の切り替え用ショートカットを調整することを検討してみると良いでしょう。
 
@@ -303,8 +321,8 @@ Dev Container 環境を起動する度に自動でビルドを実行する必要
 Docker Hub で公開されているビルド済みのものをダウンロードしてタグをつけます。
 
 ```console
-docker pull hiro345g/devnode-desktop:1.0
-docker image tag hiro345g/devnode-desktop:1.0 devnode-desktop:1.0
+docker pull hiro345g/devnode-desktop:1.1
+docker image tag hiro345g/devnode-desktop:1.1 devnode-desktop:1.1
 ```
 
 ### VS Code を使う方法
@@ -312,14 +330,14 @@ docker image tag hiro345g/devnode-desktop:1.0 devnode-desktop:1.0
 VS Code を起動してから、F1 キーを入力して VS Code のコマンドパレットを表示してます。入力欄へ「dev containers open」などと入力すると「Dev Containers: Open Folder in Container...」が選択肢に表示されます。これをクリックすると、フォルダーを選択する画面になるので `${REPO_DIR}/build_devcon` を指定して開きます。
 
 `vsc-build_devcon-` で始まる Docker イメージが作成されてコンテナーが起動します。
-`vsc-build_devcon-` で始まる Docker イメージに `devnode-desktop:1.0` のタグをつけます。
+`vsc-build_devcon-` で始まる Docker イメージに `devnode-desktop:1.1` のタグをつけます。
 
-例えば、次の例だと vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid といったイメージが作成されたので、それに対して `devnode-desktop:1.0` のタグをつけています。
+例えば、次の例だと vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid といったイメージが作成されたので、それに対して `devnode-desktop:1.1` のタグをつけています。
 
 ```console
 $ docker container ls |grep vsc
 351cab45fe6c   vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid   （略）
-$ docker tag vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid devnode-desktop:1.0
+$ docker tag vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid devnode-desktop:1.1
 ```
 
 ### build.sh を使う方法

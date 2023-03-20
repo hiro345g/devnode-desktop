@@ -1,5 +1,5 @@
 #! /bin/sh
-IMAGE_NAME=devnode-desktop:1.0
+IMAGE_NAME=devnode-desktop:1.1
 BUILD_DEVCON_DIR=$(cd $(dirname $0);pwd)
 PATH=${PATH}:${NPM_CONFIG_PREFIX}/bin
 
