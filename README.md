@@ -1,12 +1,27 @@
 # devnode-desktop
 
-これは、Web アプリの開発時に利用できる Web ブラウザが利用できる簡易デスクトップ環境を提供する Dev Container に必要なファイルをまとめたものです。devnode-desktop を使うと日本語に対応した簡易 Desktop 環境の Docker コンテナーで Firefox や Chromium が用意できるようになります。
+これは、簡易デスクトップ環境を提供する Dev Container を簡単に使えるようにしたものです。
+次の特長があります。
 
-Web アプリ開発時はキャッシュクリアや開発用のプラグインの利用が必要だったりするため、普段の Web ブラウザ利用方法とは違った使い方になります。そのため、開発専用の Web ブラウザ環境を用意したいときがあります。そういったときに、このコンテナーを使用します。
+- VS Code で使える Dev Container
+- 開発専用の Web ブラウザ
+- 日本語入力に対応
 
-これを使うと、普段使っているデスクトップ環境から隔離されたコンテナー環境で Firefox や Chromium といった Web ブラウザを使うことができるようになります。つまり、開発中の Web アプリの動作確認専用の Web ブラウザ環境が使えるようになるわけです。こういった環境を用意することで、効率よく Web アプリの開発ができるようになります。
+devnode-desktop を使うと日本語に対応した簡易 Desktop 環境の Docker コンテナーで Firefox や Chromium が用意できるようになり、Web アプリの開発などで利用できるようになります。
 
-Docker イメージは <https://hub.docker.com/r/hiro345g/devnode-desktop> で公開されているものを使用します。ここには、これをビルドするためのファイルも含まれています。
+Web アプリ開発時に、普段の Web ブラウザを使っていると、次のような場面で困ったことがありませんか？
+
+- 開発で使っているキャッシュだけクリアしたい
+- 開発で使っている Cookie だけクリアしたい
+- 開発用のプラグインは開発中だけ有効にしたい
+
+開発中に利用する Web ブラウザは普段の利用方法とは違った使い方になります。そのため、開発専用の Web ブラウザ環境を用意したいときがあります。Web ブラウザのプロファイル機能を使うと、ある程度は解決するのですが、Docker コンテナーとして用意できるなら、それを使うのも「あり」だろうと考えて、devnode-desktop 環境を用意しました。
+
+これを使うと、普段使っているデスクトップ環境から隔離されたコンテナー環境で Firefox や Chromium といった Web ブラウザを使うことができるようになります。隔離された環境なので、例えばホストファイルにステージング環境の IP と実際に使うホスト名のエントリを登録して動作させることもできます。開発中の Web アプリの動作を確認するための専用 Web ブラウザ環境なので、後で正しい IP へ戻すといった作業も発生しません。こういった環境を用意することで、効率よく Web アプリの開発ができるようになります。
+
+## 使用しているもの
+
+Docker イメージは Docker Hub の <https://hub.docker.com/r/hiro345g/devnode-desktop> で公開されているものを使用します。ちなみに、この GitHub のリポジトリーには、この Docker イメージをビルドするためのファイルも含まれているので、Docker Hub のものを使わずにローカルマシンでビルドしたものを使うこともできます。
 
 devnode-desktop では、<https://github.com/devcontainers/images/tree/main/src/typescript-node> で公開されている mcr.microsoft.com/devcontainers/typescript-node:18-bullseye の Docker イメージをベースとしています。Feature に <https://github.com/devcontainers/features/> で公開されている desktop-lite、docker-outside-of-docker、git、git-lfs を指定して Docker イメージを作成しています。
 
