@@ -6,7 +6,7 @@ COPY ./node.dot.bashrc /home/node/.bashrc
 
 RUN apt-get update && apt-get -y upgrade \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install task-japanese fonts-vlgothic firefox-esr-l10n-ja chromium ibus bash-completion iproute2 iputils-ping dnsutils \
+    && apt-get -y install task-japanese fonts-vlgothic firefox-esr-l10n-ja chromium chromium-l10n ibus bash-completion iproute2 iputils-ping dnsutils \
     && sed -i -E 's/# (ja_JP.UTF-8)/\1/' /etc/locale.gen \
     && locale-gen \
     && rm /etc/localtime \

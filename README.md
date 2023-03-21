@@ -297,18 +297,20 @@ cd ${REPO_DIR}
 docker compose down
 ```
 
-これを利用する場合は、次のように `devnode-desktop-mozc` ディレクトリーを用意します。ここでは `../${REPO_DIR}` ディレクトリーの中に用意しています。
+これを利用する場合は、次のように `devnode-desktop-mozc` ディレクトリーを用意します。ここでは `${REPO_DIR}/..` ディレクトリーの中に用意しています。
 
 ```console
 cd ${REPO_DIR}/..
 mkdir devnode-desktop-mozc
 cp -r ${REPO_DIR}/.devcontainer devnode-desktop-mozc/
 cp -r ${REPO_DIR}/docker-compose.yml devnode-desktop-mozc/
-if [ -e ${REPO_DIR}/.env ]; then cp ${REPO_DIR}/.env devnode-desktop-mozc/
+if [ -e ${REPO_DIR}/.env ]; then cp ${REPO_DIR}/.env devnode-desktop-mozc/; fi
 mkdir devnode-desktop-mozc/workspace_share
 sed -i 's/devnode-desktop/devnode-desktop-mozc/' devnode-desktop-mozc/.devcontainer/devcontainer.json
 sed -i 's/devnode-desktop/devnode-desktop-mozc/' devnode-desktop-mozc/docker-compose.yml
 ```
+
+`${REPO_DIR}/workspace_share/script/create-devnode-deskto-mozc.sh` にスクリプトを用意してあるので、devnode-desktop コンテナーの中で実行すると、workspace_share/dev/devnode-desktop-mozc が作成できます。
 
 これを使って devnode-desktop-mozc コンテナーの Dev Container を起動すると、mozc がインストールされた状態で使えるようになります。
 
@@ -336,8 +338,8 @@ Dev Container 環境を起動する度に自動でビルドを実行する必要
 Docker Hub で公開されているビルド済みのものをダウンロードしてタグをつけます。
 
 ```console
-docker pull hiro345g/devnode-desktop:1.1
-docker image tag hiro345g/devnode-desktop:1.1 devnode-desktop:1.1
+docker pull hiro345g/devnode-desktop:1.2
+docker image tag hiro345g/devnode-desktop:1.2 devnode-desktop:1.2
 ```
 
 ### VS Code を使う方法
@@ -345,14 +347,14 @@ docker image tag hiro345g/devnode-desktop:1.1 devnode-desktop:1.1
 VS Code を起動してから、F1 キーを入力して VS Code のコマンドパレットを表示してます。入力欄へ「dev containers open」などと入力すると「Dev Containers: Open Folder in Container...」が選択肢に表示されます。これをクリックすると、フォルダーを選択する画面になるので `${REPO_DIR}/build_devcon` を指定して開きます。
 
 `vsc-build_devcon-` で始まる Docker イメージが作成されてコンテナーが起動します。
-`vsc-build_devcon-` で始まる Docker イメージに `devnode-desktop:1.1` のタグをつけます。
+`vsc-build_devcon-` で始まる Docker イメージに `devnode-desktop:1.2` のタグをつけます。
 
-例えば、次の例だと vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid といったイメージが作成されたので、それに対して `devnode-desktop:1.1` のタグをつけています。
+例えば、次の例だと vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid といったイメージが作成されたので、それに対して `devnode-desktop:1.2` のタグをつけています。
 
 ```console
 $ docker container ls |grep vsc
 351cab45fe6c   vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid   （略）
-$ docker tag vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid devnode-desktop:1.1
+$ docker tag vsc-build_devcon-b3ed032a709b975173b2f2fcf5212c79-uid devnode-desktop:1.2
 ```
 
 ### build.sh を使う方法
