@@ -310,7 +310,7 @@ sed -i 's/devnode-desktop/devnode-desktop-mozc/' devnode-desktop-mozc/.devcontai
 sed -i 's/devnode-desktop/devnode-desktop-mozc/' devnode-desktop-mozc/docker-compose.yml
 ```
 
-`${REPO_DIR}/workspace_share/script/create-devnode-deskto-mozc.sh` にスクリプトを用意してあるので、devnode-desktop コンテナーの中で実行すると、workspace_share/dev/devnode-desktop-mozc が作成できます。
+`${REPO_DIR}/workspace_share/script/create-devnode-desktop-mozc.sh` にスクリプトを用意してあるので、devnode-desktop コンテナーの中で実行すると、workspace_share/dev/devnode-desktop-mozc が作成できます。
 
 これを使って devnode-desktop-mozc コンテナーの Dev Container を起動すると、mozc がインストールされた状態で使えるようになります。
 
