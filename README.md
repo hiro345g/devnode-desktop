@@ -163,7 +163,28 @@ VNC (Virtual Network Computing) を使ってデスクトップ環境へアクセ
 
 ## 使い方
 
-先に「ビルド」を参照して Docker イメージを作成してください。また、必要なら「環境変数」を参考にして `.env` ファイルを用意してください。
+ここでは使い方について説明します。
+hiro345g/devnode-desktop (<https://hub.docker.com/r/hiro345g/devnode-desktop>)
+
+## 使う準備
+
+先に「環境変数」を参考にして `.env` ファイルを用意してください。カスタマイズをしたい場合は、「カスタマイズ」を参照して Docker イメージを作成してください。
+
+次に Docker Hub で公開されているビルド済みのものをダウンロードしておきます。
+
+```console
+docker pull hiro345g/devnode-desktop:1.2
+```
+
+`npm` コマンドを使うときは、`docker-compose.yml` で指定した環境変数 `NPM_CONFIG_PREFIX` のディレクトリーの lib ディレクトリー（`NPM_CONFIG_PREFIX` を変更していない場合は `/home/node/repo/.npm-global/lib`）ディレクトリーをコンテナーが使う devnode-desktop-node-repo-data ボリューム内にあらかじめ作成しておく必要があります。下記コマンドで用意できます。
+
+```console
+cd ${REPO_DIR}
+docker compose run --rm devnode-desktop bash -c 'mkdir -p ${NPM_CONFIG_PREFIX}/lib'
+docker compose down
+```
+
+### 利用開始
 
 VS Code を起動し、F1 キーを入力してコマンドパレットを表示してから、「Dev Containers: Open Folder in Container...」をクリックします。
 フォルダーを選択する画面になるので `${REPO_DIR}` を指定して開きます。
@@ -185,14 +206,6 @@ VNC クライアントを使う場合は localhost:5901 へアクセスします
 ### コンテナーの停止、削除の仕方
 
 VS Code の Docker 拡張機能の画面で、CONTAINERS の欄に表示されている devnode-desktop のコンテキストメニューから `Compose Sotp` でコンテナー停止、`Compose Down` でコンテナー削除ができます。
-
-## npm コマンド
-
-npm コマンドを使うときは、`docker-compose.yml` で指定した環境変数 `NPM_CONFIG_PREFIX` のディレクトリーの lib ディレクトリー（`NPM_CONFIG_PREFIX` を変更していない場合は `/home/node/repo/.npm-global/lib`）ディレクトリーをコンテナー内であらかじめ作成しておいてください。
-
-```console
-mkdir -p ${NPM_CONFIG_PREFIX}/lib
-```
 
 ## 日本語入力
 
@@ -319,9 +332,9 @@ cd ${REPO_DIR}/devnode-desktop-mozc
 code devnode-desktop-mozc
 ```
 
-## ビルド
+## カスタマイズ（ビルド）
 
-最初にビルドが必要です。
+カスタマイズするにはビルドが必要です。
 Dev Container 環境を起動する度に自動でビルドを実行する必要はないので、ビルド作業を別にしてあります。
 実行時用のものと似たような `docker-compose.yml` を用意することになりますが、こうしておいた方が Docker イメージのタグ名指定が設定ファイルで明示的にわかるようになります。また、意図しない更新も入りにくくなり、利用時に安定します。
 
@@ -331,16 +344,43 @@ Dev Container 環境を起動する度に自動でビルドを実行する必要
 - VS Code を使う方法
 - build.sh を使う方法
 
-合計3つの方法があるので順番に説明します。
+準備も必要なので、順番に説明します。
 
-### Docker Hub で公開されているビルド済みのものを使う方法
+### ビルドの準備
 
-Docker Hub で公開されているビルド済みのものをダウンロードしてタグをつけます。
+使用する Docker イメージを変更する必要があるので、`${REPO_DIR}/docker-compose.yml` を次のように編集します。
+
+```yaml
+name: devnode-py-desktop
+services:
+  devnode-py-desktop:
+    #image: hiro345g/devnode-desktop:1.2
+    image: devnode-desktop:1.2
+    container_name: devnode-py-desktop
+    （略）
+```
+
+ちなみに、`${REPO_DIR}/docker-compose.yml` を編集後に、このファイルを変更せずに、もとの Docker イメージを使うようにしたい場合は、Docker Hub で公開されているビルド済みのものをダウンロードしてタグをつけます。
+
+すでに devnode-desktop:1.2 のイメージがある場合は `docker image rm` コマンドで削除します。
+
+```console
+docker image rm devnode-desktop:1.2
+```
+
+ビルド済みのものをダウンロードするには、次のように `docker pull` コマンドを実行します。
 
 ```console
 docker pull hiro345g/devnode-desktop:1.2
+```
+
+`hiro345g/devnode-desktop:1.2` に devnode-desktop:1.2 のイメージのタグをつけます。
+
+```console
 docker image tag hiro345g/devnode-desktop:1.2 devnode-desktop:1.2
 ```
+
+もとのイメージを使うように戻した後に、カスタマイズしたものに変えたい場合は、devnode-desktop:1.2 のイメージを `docker image rm` コマンドで削除してからビルドします。
 
 ### VS Code を使う方法
 
