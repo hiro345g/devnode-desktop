@@ -137,6 +137,13 @@ __bash_prompt() {
 __bash_prompt
 export PROMPT_DIRTRIM=4
 
+echo $PATH | grep '/workspace/.npm-global/bin' > /dev/null
+if [ $? -ne 0 ] ; then
+  if [ -d "${HOME}/workspace/.npm-global/bin" ] ; then
+    PATH="${HOME}/workspace/.npm-global/bin:${PATH}"
+  fi
+fi
+
 export LANG=ja_JP.UTF-8
 export LANGUAGE=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8

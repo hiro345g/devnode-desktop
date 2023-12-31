@@ -1,17 +1,17 @@
 name: devnode-desktop
 services:
   devnode-desktop:
-    image: hiro345g/devnode-desktop:1.2
+    image: hiro345g/devnode-desktop:1.3
     container_name: devnode-desktop
     hostname: devnode-desktop
     init: true
     tty: true
     user: node
-    working_dir: /home/node
+    working_dir: /home/node/workspace
     networks:
       devnode-net:
     volumes:
-      - repo-data:/home/node/repo
+      - workspace-data:/home/node/workspace
       - vscode-server-extensions:/home/node/.vscode-server/extensions
       - type: bind
         source: ${SHARE_DIR:-./workspace_share}
@@ -21,11 +21,11 @@ services:
       ENV LANG: ja_JP.UTF-8
       ENV LC_ALL: ja_JP.UTF-8
       EDITOR: code
-      NPM_CONFIG_PREFIX: /home/node/repo/.npm-global
+      NPM_CONFIG_USERCONFIG: ${NPM_CONFIG_USERCONFIG:-/home/node/.npmrc}
 
 volumes:
-  repo-data:
-    name: devnode-desktop-node-repo-data
+  workspace-data:
+    name: devnode-desktop-node-workspace-data
   vscode-server-extensions:
     name: devnode-desktop-vscode-server-extensions
 
